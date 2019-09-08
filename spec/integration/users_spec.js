@@ -26,7 +26,7 @@ describe("routes: users", () => {
     describe("POST /user/signup", () => {
         it("should create a new user with values and redirect", (done) => {
             const options = {
-                url: `${base}`,
+                url: "http://localhost:3000/user/signup",
                 form: {
                     email: "user@example.com",
                     username: "greenarrow",
@@ -49,7 +49,7 @@ describe("routes: users", () => {
         });
         it("should not create a new user with invalid attributes and redirect", (done) => {
             const options = {
-                url: `${base}`,
+                url: "http://localhost:3000/user/signup",
                 form: {
                     email: "none",
                     username: "greenarrow",
@@ -68,4 +68,15 @@ describe("routes: users", () => {
             });
         });
     });
+    describe("GET /users/sign_in", () => {
+
+        it("should render a view with a sign in form", (done) => {
+          request.get(`${base}sign_in`, (err, res, body) => {
+            expect(err).toBeNull();
+            expect(body).toContain("Sign in");
+            done();
+          });
+        });
+   
+      });
 })
