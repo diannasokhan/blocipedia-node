@@ -1,7 +1,7 @@
 const userQueries = require("../db/queries.users.js");
 const passport = require("passport");
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 
 module.exports = {
     signUp(req, res, next){    
@@ -10,7 +10,33 @@ module.exports = {
     upgrade(req, res, next){
         res.render("users/upgrade")
     },
+    success(req, res, next){
+    userQueries.upgradeUser(req, (err, user) => {
+        if(err){
+            req.flash("error", err);
+            res.redirect("/users/upgrade");
+        }else{
+            req.flash("notice", "You've successfully upgraded your account");
+            res.redirect("/");
+        }
+    })
+    
+    },
 
+    downgrade(req, res, next){
+        res.render("users/downgrade")
+    },
+    downgraded(req, res, next){
+        userQueries.downgradeUser(req, (err, user) => {
+            if(err){
+                req.flash("error", err);
+                res.redirect("/users/downgrade");
+            }else{
+                req.flash("notice", "You've successfully downgraded your account");
+                res.redirect("/");
+            }
+        })
+    },
     create(req, res, next){
         let newUser = {
             email: req.body.email,

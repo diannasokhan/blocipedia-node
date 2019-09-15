@@ -5,50 +5,25 @@
   </head>
   <body>
     <% include ../static/partials/navbar.ejs %>
+   
 
     <main class="container">
-
+            <% include ../static/partials/messages.ejs %>
       <h1>Upgrade Account!</h1>
+      <p>Create private wikis</p>
 
-      <button
-  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
-  id="checkout-button-sku_FnSzFE2Tt4Dxih"
-  role="link"
->
-  Checkout
-</button>
-
-<div id="error-message"></div>
-
-<script>
-  var stripe = Stripe('pk_test_N7dKlsgNxkKE91bEkLUQ1cKx006Z0kn3G7');
-
-  var checkoutButton = document.getElementById('checkout-button-sku_FnSzFE2Tt4Dxih');
-  checkoutButton.addEventListener('click', function () {
-    // When the customer clicks on the button, redirect
-    // them to Checkout.
-    stripe.redirectToCheckout({
-      items: [{sku: 'sku_FnSzFE2Tt4Dxih', quantity: 1}],
-
-      // Do not rely on the redirect to the successUrl for fulfilling
-      // purchases, customers may not always reach the success_url after
-      // a successful payment.
-      // Instead use one of the strategies described in
-      // https://stripe.com/docs/payments/checkout/fulfillment
-      successUrl: 'https://your-website.com/success',
-      cancelUrl: 'https://your-website.com/canceled',
-    })
-    .then(function (result) {
-      if (result.error) {
-        // If `redirectToCheckout` fails due to a browser or network
-        // error, display the localized error message to your customer.
-        var displayError = document.getElementById('error-message');
-        displayError.textContent = result.error.message;
-      }
-    });
-  });
-</script>
-      </form>
+      <form action="/users/upgrade" method="POST">
+        <script
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="pk_test_N7dKlsgNxkKE91bEkLUQ1cKx006Z0kn3G7"
+          data-amount="1500"
+          data-name="Blocipedia"
+          data-description="Widget"
+          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+          data-locale="auto"
+          data-zip-code="true">
+        </script>
+      </form> 
     </main>
 
     <% include ../static/partials/baseScript.ejs %>
