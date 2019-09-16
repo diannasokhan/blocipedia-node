@@ -10,17 +10,22 @@
 
       <h1>Wikis</h1>
         <a href="/wikis/new" class="btn btn-success">New Wiki</a>
-        <% if(currentUser.role == "premium") { %>
-        <a href="/wikis/private" class="btn btn-success">Create Private Wiki</a>
-        <% } %>
       <ul class="list-group">
 
-        <% wikis.forEach((wiki) => { %>
+       
+          <% wikis.forEach((wiki) => { %>
 
-          <li class="list-group-item">
-            <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
-          </li>
-        <% }) %>
+            <li class="list-group-item">
+               <% if((currentUser && currentUser.role == "premium" && currentUser.id === wiki.userId) || currentUser.role == "admin") { %> 
+                <a href="/wikis/<%= wiki.id %>">{wiki.title} </a> 
+                <% } else { %>
+                  if(wiki.private == "false"){ %>
+                    <a href="/wikis/<%= wiki.id %>">{wiki.title} </a> 
+                    <% } %>
+                  <% } %>
+            </li>
+          <% }) %>
+         
       </ul>
 
     </main>

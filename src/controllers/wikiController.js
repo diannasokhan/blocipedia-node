@@ -84,36 +84,6 @@ module.exports = {
                 res.redirect(`/wikis/${req.params.id}`)
             }
         })
-    }, 
-    newPrivateWiki(req, res, next){
-        console.log(req.user)
-        const authorized = new Authorizer(req.user).newPrivateWiki();
-        if(authorized){
-            res.render("/wikis/private");
-        }else{
-            req.flash("notice", "You need to be a premium member to do that");
-            res.redirect("/wikis");
-        }
-    },
-    createPrivateWiki(req, res, next){
-        const authorized = new Authorizer(req.user).createPrivateWiki();
-
-        if(authorized){
-            let newWiki = {
-                title: req.body.title,
-                body: req.body.body,
-                private: true
-            };
-            wikiQueries.addWiki(newWiki, (err, wiki) => {
-                if(err){
-                    res.redirect(500, "/wikis/private");
-                }else{
-                    res.redirect(303, `/wikis/${wiki.id}`)
-                }
-            })
-        }else{
-            req.flash("notice", "You are not authorized to do that");
-            res.redirect("/wikis");
-        }
     }
+    
 }
