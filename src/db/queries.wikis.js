@@ -13,7 +13,8 @@ module.exports = {
     addWiki(newWiki, callback){
         return Wiki.create({
             title: newWiki.title,
-            body: newWiki.body
+            body: newWiki.body,
+            private: newWiki.private
         }).then((wiki) => {
             callback(null, wiki);
         }).catch((err) => {

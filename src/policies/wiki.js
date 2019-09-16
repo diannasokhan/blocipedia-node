@@ -16,4 +16,10 @@ module.exports = class WikiPolicy extends ApplicationPolicy {
     destroy(){
         return this.update();
     }
+    newPrivateWiki(){
+        return this._isAdmin() || this._isPremium();
+    }
+    createPrivateWiki(){
+        return this._isAdmin() || this._isPremium();
+    }
 }
