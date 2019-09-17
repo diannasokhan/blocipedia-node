@@ -27,7 +27,8 @@ module.exports = {
         if(authorized){
             let newWiki = {
                 title: req.body.title,
-                body: req.body.body
+                body: req.body.body,
+                private: req.body.private
             };
             wikiQueries.addWiki(newWiki, (err, wiki) => {
                 if(err){
@@ -84,6 +85,15 @@ module.exports = {
                 res.redirect(`/wikis/${req.params.id}`)
             }
         })
+    },
+    privateIndex(req, res, next){
+        wikiQueries.getAllWikis((err, wikis) => {
+            if(err){
+                res.redirect(500, "static/index")
+            }else{
+                res.render("/wikis/privateIndex", {wikis})
+            }
+        })
     }
-    
+
 }

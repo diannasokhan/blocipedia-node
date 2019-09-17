@@ -16,4 +16,5 @@ module.exports = class WikiPolicy extends ApplicationPolicy {
     destroy(){
         return this.update();
     }
+    
 }

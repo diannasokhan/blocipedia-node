@@ -8,20 +8,17 @@
       <% include ../static/partials/navbar.ejs %>
       <% include ../static/partials/messages.ejs %>
 
-      <h1>Wikis</h1>
+      <h1>Private Wikis</h1>
         <a href="/wikis/new" class="btn btn-success">New Wiki</a>
-        <% if(currentUser.role == "premium" || currentUser.role == "admin") { %>
-        <a href="wikis/privateIndex" class="btn btn-success">Private Wikis</a>
-        <% } %>
       <ul class="list-group">
 
        
           <% wikis.forEach((wiki) => { %>
 
             <li class="list-group-item">
-                 <% if(wiki.private == false){ %>
-                    <a href="/wikis/<%= wiki.id %>"><%= wiki.title %></a> 
-                  <% } %>
+               <% if((wiki.private == true && currentUser.role == "premium" && currentUser.id === wiki.userId) || currentUser.role == "admin") { %> 
+                <a href="/wikis/<%= wiki.id %>"><%= wiki.title %> </a> 
+                <% } %>
             </li>
           <% }) %>
          
