@@ -16,11 +16,11 @@
           <% wikis.forEach((wiki) => { %>
 
             <li class="list-group-item">
-               <% if((currentUser && currentUser.role == "premium" && currentUser.id === wiki.userId) || currentUser.role == "admin") { %> 
-                <a href="/wikis/<%= wiki.id %>">{wiki.title} </a> 
-                <% } else { %>
-                  if(wiki.private == "false"){ %>
-                    <a href="/wikis/<%= wiki.id %>">{wiki.title} </a> 
+               <% if((currentUser.role == "premium" && currentUser.id === wiki.userId) || currentUser.role == "admin") { %> 
+                <a href="/wikis/<%= wiki.id %>"><%= wiki.title %> </a> 
+                <% } else { 
+                  if(wiki.private == false){ %>
+                    <a href="/wikis/<%= wiki.id %>"><%= wiki.title %></a> 
                     <% } %>
                   <% } %>
             </li>
