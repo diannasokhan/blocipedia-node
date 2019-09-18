@@ -37,7 +37,6 @@ module.exports = {
             private: newWiki.private,
             userId: newWiki.userId
         }).then((wiki) => {
-            console.log(wiki)
             callback(null, wiki);
         }).catch((err) => {
             callback(err);
@@ -94,7 +93,6 @@ module.exports = {
     privateToPublic(id){
         return Wiki.findAll()
         .then((wikis) => {
-            console.log(wikis)
             wikis.forEach((wiki) => {
                 if(wiki.userId == id && wiki.private == true){
                     wiki.update({private: false})
