@@ -45,7 +45,7 @@ module.exports = {
                 res.redirect("/");
             }
         })
-    },
+    } ,
     create(req, res, next){
         let newUser = {
             email: req.body.email,

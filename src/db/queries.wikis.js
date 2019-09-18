@@ -95,6 +95,7 @@ module.exports = {
             wikis.forEach((wiki) => {
                 if(wiki.userId == id && wiki.private == true){
                     wiki.update({private: false});
+                    console.log(wiki)
                 }
             })
         }).catch((err) => {

@@ -12,4 +12,5 @@ router.get("/wikis/:id/edit", wikiController.edit);
 router.post("/wikis/:id/update", wikiController.update);
 
 
+
 module.exports = router;
