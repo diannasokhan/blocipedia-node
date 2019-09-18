@@ -34,8 +34,10 @@ module.exports = {
         return Wiki.create({
             title: newWiki.title,
             body: newWiki.body,
-            private: newWiki.private
+            private: newWiki.private,
+            userId: newWiki.userId
         }).then((wiki) => {
+            console.log(wiki)
             callback(null, wiki);
         }).catch((err) => {
             callback(err);
@@ -92,10 +94,13 @@ module.exports = {
     privateToPublic(id){
         return Wiki.findAll()
         .then((wikis) => {
+            console.log(wikis)
             wikis.forEach((wiki) => {
                 if(wiki.userId == id && wiki.private == true){
-                    wiki.update({private: false});
-                    console.log(wiki)
+                    wiki.update({private: false})
+                    .then(() => {
+                        console.log("wiki downgraded")
+                    }) 
                 }
             })
         }).catch((err) => {

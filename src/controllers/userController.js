@@ -2,6 +2,9 @@ const userQueries = require("../db/queries.users.js");
 const wikiQueries = require("../db/queries.wikis.js");
 const passport = require("passport");
 const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const User = require("../db//models").User;
+const Wiki = require("../db/models").Wiki;
 
 function buildErrorList(err) {
     return err.errors.map(error => ({
