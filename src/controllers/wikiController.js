@@ -3,7 +3,7 @@ const Authorizer = require("../policies/wiki.js")
 
 module.exports = {
     index(req, res, next){
-        wikiQueries.getAllWikis((err, wikis) => {
+        wikiQueries.getAllPublicWikis((err, wikis) => {
             if(err){
                 res.redirect(500, "static/index")
             }else{
@@ -87,11 +87,11 @@ module.exports = {
         })
     },
     privateIndex(req, res, next){
-        wikiQueries.getAllWikis((err, wikis) => {
+        wikiQueries.getAllPrivateWikis((err, wikis) => {
             if(err){
                 res.redirect(500, "static/index")
             }else{
-                res.render("/wikis/privateIndex", {wikis})
+                res.render("wikis/private", {wikis})
             }
         })
     }

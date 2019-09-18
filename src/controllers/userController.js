@@ -1,4 +1,5 @@
 const userQueries = require("../db/queries.users.js");
+const wikiQueries = require("../db/queries.wikis.js");
 const passport = require("passport");
 const sgMail = require('@sendgrid/mail');
 
@@ -34,6 +35,7 @@ module.exports = {
         res.render("users/downgrade")
     },
     downgraded(req, res, next){
+        wikiQueries.privateToPublic(req.user.id);
         userQueries.downgradeUser(req, (err, user) => {
             if(err){
                 req.flash("error", err);

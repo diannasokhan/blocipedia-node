@@ -10,6 +10,26 @@ module.exports = {
             callback(err);
         })
     },
+    getAllPublicWikis(callback){
+        return Wiki.findAll({
+            where: {private: false}
+        })
+        .then((wikis) => {
+            callback(null, wikis);
+        }).catch((err) => {
+            callback(err);
+        })
+    },
+    getAllPrivateWikis(callback){
+        return Wiki.findAll({
+            where: {private: true}
+        })
+        .then((wikis) => {
+            callback(null, wikis);
+        }).catch((err) => {
+            callback(err);
+        })
+    },
     addWiki(newWiki, callback){
         return Wiki.create({
             title: newWiki.title,
@@ -67,6 +87,18 @@ module.exports = {
                 req.flash("notice", "You are not authorized to do that.");
                 callback("Forbidden");
             }
+        })
+    },
+    privateToPublic(id){
+        return Wiki.findAll()
+        .then((wikis) => {
+            wikis.forEach((wiki) => {
+                if(wiki.userId == id && wiki.private == true){
+                    wiki.update({private: false});
+                }
+            })
+        }).catch((err) => {
+            console.log(err)
         })
     }
 }
