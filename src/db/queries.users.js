@@ -1,6 +1,6 @@
 const User = require("./models").User;
 const bcrypt = require("bcryptjs");
-const Collaborator = require("./models").Collaborators;
+const Collaborator = require("./models").Collaborator;
 
 module.exports = {
     createUser(newUser, callback){

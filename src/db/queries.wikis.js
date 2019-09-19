@@ -1,5 +1,5 @@
 const Wiki = require("./models").Wiki;
-const Collaborator = require("./models").Collaborators;
+const Collaborator = require("./models").Collaborator;
 const Authorizer = require("../policies/application.js")
 
 module.exports = {
@@ -53,7 +53,8 @@ module.exports = {
                     result["wiki"] = wiki;
                     Collaborator.scope({method: ["collaboratorsFor", id]}).findAll()
                     .then((collaborators) => {
-                     result["collaborators"] = collaborators;
+                    result["collaborators"] = collaborators;
+                     console.log(result.wiki)
                       callback(null, result);
               })
               .catch((err) => {

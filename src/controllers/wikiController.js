@@ -46,8 +46,8 @@ module.exports = {
     },
     show(req, res, next) {
         wikiQueries.getWiki(req.params.id, (err, result) => {
-        wiki = result["wiki"];
-        collaborators = result["collaborators"];
+        let wiki = result["wiki"].dataValues;
+        let collaborators = result["collaborators"];
         if(err || wiki == null){
           res.redirect(404, "/");
         } else {
@@ -73,7 +73,7 @@ module.exports = {
     },
     edit(req, res, next){
         wikiQueries.getWiki(req.params.id, (err, result) => {
-            wiki = result["wiki"];
+            wiki = result["wiki"].dataValues;
             collaborators = result["collaborators"];
                 if(err || wiki == null){
                     res.redirect(404, "/");
