@@ -54,7 +54,6 @@ module.exports = {
                     Collaborator.scope({method: ["collaboratorsFor", id]}).findAll()
                     .then((collaborators) => {
                     result["collaborators"] = collaborators;
-                     console.log(result.wiki)
                       callback(null, result);
               })
               .catch((err) => {

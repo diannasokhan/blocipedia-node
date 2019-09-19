@@ -4,14 +4,16 @@ const wikiQueries = require ("../db/queries.wikis.js");
 const collaboratorQueries = require("../db/queries.collaborators.js");
 const Authorizer = require("../policies/application");
 
+
 module.exports = {
 
     add(req, res, next){
         collaboratorQueries.add(req, (err, collaborator) => {
             if(err){
+                console.log(err)
                 req.flash("error", err);
             }
-            res.redirect(req.headers.referrer);
+            res.redirect(req.headers.referer);
         });
     },
 
