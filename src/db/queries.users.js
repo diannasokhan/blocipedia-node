@@ -33,5 +33,24 @@ module.exports = {
         }).catch((err) => {
             callback(err);
         })
-    }
+    },
+    getUser(id, callback){
+        let result = {};
+        User.findByPk(id)
+        .then((user) => {
+          if(!user){
+            callback(404);
+          } else {
+            result["user"] = user;
+            Collaborator.scope({method: ["collaborationsFor", id]}).findAll()
+            .then((collaborations) => {
+              result["collaborations"] = collaborations;
+              callback(null, result);
+            })
+            .catch((err) => {
+              callback(err);
+            })
+          }
+        })
+      }
 }

@@ -3,8 +3,7 @@ const wikiQueries = require("../db/queries.wikis.js");
 const passport = require("passport");
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-const User = require("../db//models").User;
-const Wiki = require("../db/models").Wiki;
+
 
 function buildErrorList(err) {
     return err.errors.map(error => ({
@@ -97,6 +96,17 @@ module.exports = {
         req.logout();
         req.flash("notice", "You've successfully signed out!");
         res.redirect("/");
-    }
+    },
+    showCollaborations(req, res, next){
+        userQueries.getUser(req.user.id, (err, result) => {
+          user = result["user"];
+          collaborations = result["collaborations"];
+          if(err || user == null){
+            res.redirect(404, "/");
+          } else {
+            res.render("users/collaborations", {user, collaborations});
+          }
+        });
+      }
 
 }

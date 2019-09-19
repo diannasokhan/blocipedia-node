@@ -26,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Wiki, {
       foreignKey: "userId",
       onDelete: "CASCADE"
+    });
+    User.hasMany(models.Collaborator, {
+      foreignKey: "userId",
+      as: "collaborator"
     })
     User.prototype.isAdmin = function(){
       return this.role === "admin";
