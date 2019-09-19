@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Collaborator.associate = function(models) {
     Collaborator.belongsTo(models.Wiki, {
-      foreignKey: "userId",
+      foreignKey: "wikiId",
       onDelete: "CASCADE"
     });
     Collaborator.belongsTo(models.User, {
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       };
     });
 
-    Collaborator.addScope("collaborationsFor", userId => {
+    Collaborator.addScope("collaboratorFor", userId => {
       return {
         include: [
           {

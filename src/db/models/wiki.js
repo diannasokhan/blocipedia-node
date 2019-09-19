@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     Wiki.hasMany(models.Collaborator, {
       foreignKey: "wikiId",
-      as: "collaborator"
+      as: "collaborators"
     })
   };
   return Wiki;

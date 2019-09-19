@@ -1,6 +1,6 @@
 const User = require("./models").User;
 const Wiki = require("./models").Wiki;
-const Collaborator = require("./models").Collaborator;
+const Collaborator = require("./models").Collaborators;
 const Authorizer = require("../policies/application");
 
 module.exports = {
@@ -50,7 +50,7 @@ module.exports = {
     },
 
     remove(req, callback){
-        let collaboratorId = req.body.collaborator;
+        const collaboratorId = req.body.collaborator;
         let wikiId = req.params.wikiId;
         const authorized = new Authorizer(req.user, wiki, collaboratorId).destroy();
         if(authorized){
