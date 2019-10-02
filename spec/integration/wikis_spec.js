@@ -15,13 +15,14 @@ describe("routes : wikis", () => {
           email: "example@gmail.com",
           username: "ChubbyBunny",
           password: "hello123",
-          role: "standard"
+          role: "premium"
         
         }).then((user) => {
           this.user = user;
           request.get({
             url: "http://localhost:3000/auth/fake",
             form: {
+              username: user.username,
               role: user.role,
               userId: user.id,
               email: user.email
@@ -81,7 +82,9 @@ describe("routes : wikis", () => {
               url: `${base}/create`,
               form: {
                 title: "Dogs",
-                body: "There are 340 dog breeds"
+                body: "There are 340 dog breeds",
+                private: false,
+                userId: this.user.id
               }
             };
       
