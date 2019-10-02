@@ -15,7 +15,7 @@ describe("routes : wikis", () => {
           email: "example@gmail.com",
           username: "ChubbyBunny",
           password: "hello123",
-          role: "premium"
+          role: "standard"
         
         }).then((user) => {
           this.user = user;
@@ -45,8 +45,8 @@ describe("routes : wikis", () => {
    
          })
         })
-  
-      });
+      })
+      
       
       describe("User performing CRUD actions for Wiki", () => {
         
@@ -90,7 +90,7 @@ describe("routes : wikis", () => {
       
     
             request.post(options,
-    
+  
               (err, res, body) => {
                 Wiki.findOne({where: {title: "Dogs"}})
                 .then((wiki) => {
