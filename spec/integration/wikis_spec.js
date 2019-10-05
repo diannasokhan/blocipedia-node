@@ -43,19 +43,18 @@ describe("routes : wikis", () => {
              done();
            });
    
+         }).catch((err) => {
+           console.log(err);
+           done();
          })
         })
       })
-      
-      
-      describe("User performing CRUD actions for Wiki", () => {
-        
+  
         describe("GET /wikis", () => {
-    
             
           it("should return all wikis", (done) => {
      
-            request.get(base, (err, res, body) => {
+            request.get(`${base}/`, (err, res, body) => {
               expect(err).toBeNull();
               expect(body).toContain("Wikis");
               expect(body).toContain("Penguins");
@@ -180,6 +179,4 @@ describe("routes : wikis", () => {
               });
           });
         });   
-    });
-  
 })

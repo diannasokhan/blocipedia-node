@@ -11,7 +11,7 @@ module.exports = {
         collaboratorQueries.add(req, (err, collaborator) => {
             if(err){
                 console.log(err)
-                req.flash("error", err);
+                req.flash("message", err);
             }
             res.redirect(req.headers.referer);
         });

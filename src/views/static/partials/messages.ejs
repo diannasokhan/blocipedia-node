@@ -1,5 +1,5 @@
 
-<% if(messages.error || messages.notice) { %>
+<% if(messages.error || messages.notice || messages.message) { %>
 
   <div class="alert alert-<%= messages.error ? 'danger' : 'warning' %> alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -12,9 +12,15 @@
               <li><%= `${err.param} ${err.msg}` %></li>
             <% }) %>
           </ul>
-          <% } else { %>
+          <% } else if(messages.notice){ %>
             <p><%= messages.notice %></p>
-          <% } %>
+          <% } else { %>
+            <ul>
+                <% messages.message.forEach((err) => { %>
+                  <li><%= `${err}` %></li>
+                <% }) %>
+            </ul>
+          <% } %>  
         </div>
       <% } %>
   
