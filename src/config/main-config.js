@@ -1,7 +1,7 @@
+require("dotenv").config();
 const path = require("path");
 const viewsFolder = path.join(__dirname, "..", "views");
 const bodyParser = require("body-parser");
-require("dotenv").config();
 const expressValidator = require("express-validator");
 const session = require("express-session");
 const flash = require("express-flash");

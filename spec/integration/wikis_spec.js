@@ -5,29 +5,30 @@ const sequelize = require("../../src/db/models/index").sequelize;
 const Wiki = require("../../src/db/models").Wiki;
 const User = require("../../src/db/models").User;
 
-describe("routes : wikis", () => {
+describe("routes: wikis", () => {
     beforeEach((done) => {
         this.wiki;
-        this.user
+        this.user;
         sequelize.sync({force: true}).then((res) => {
   
         User.create({
           email: "example@gmail.com",
           username: "ChubbyBunny",
           password: "hello123",
-          role: "standard"
+          role: "premium"
         
         }).then((user) => {
+         
           this.user = user;
           request.get({
             url: "http://localhost:3000/auth/fake",
             form: {
-              username: user.username,
               role: user.role,
               userId: user.id,
-              email: user.email
-            }
-          })
+              email: user.email,
+              username: user.username
+            },
+          });
           Wiki.create({
             title: "Penguins",
             body: "Why are penguins called penguins?",
@@ -54,7 +55,8 @@ describe("routes : wikis", () => {
             
           it("should return all wikis", (done) => {
      
-            request.get(`${base}/`, (err, res, body) => {
+            request.get(base, (err, res, body) => {
+              
               expect(err).toBeNull();
               expect(body).toContain("Wikis");
               expect(body).toContain("Penguins");
@@ -91,6 +93,7 @@ describe("routes : wikis", () => {
             request.post(options,
   
               (err, res, body) => {
+      
                 Wiki.findOne({where: {title: "Dogs"}})
                 .then((wiki) => {
                   expect(wiki.title).toBe("Dogs");
