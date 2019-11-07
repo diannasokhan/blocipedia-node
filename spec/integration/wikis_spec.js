@@ -15,7 +15,7 @@ describe("routes: wikis", () => {
           email: "example@gmail.com",
           username: "ChubbyBunny",
           password: "hello123",
-          role: "premium"
+          role: "standard"
         
         }).then((user) => {
          
