@@ -23,7 +23,7 @@ describe("routes : wikis", () => {
             url: "http://localhost:3000/auth/fake",
             form: {
               role: user.role,
-              userId: user.id,
+              id: user.id,
               email: user.email
             }
           })
