@@ -25,8 +25,7 @@ describe("routes: wikis", () => {
             form: {
               role: user.role,
               id: user.id,
-              email: user.email,
-              username: user.username
+              email: user.email
             },
           });
           Wiki.create({
@@ -44,9 +43,6 @@ describe("routes: wikis", () => {
              done();
            });
    
-         }).catch((err) => {
-           console.log(err);
-           done();
          })
         })
       })
