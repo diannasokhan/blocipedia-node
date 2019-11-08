@@ -1,8 +1,6 @@
-
-console.log("NODE_ENV)U!#U!@_#(U!)@(#U", process.env.NODE_ENV)
 const app = require("./app");
 const http = require("http");
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(process.env.PORT || "5000");
  app.set("port", port);
 
  const server = http.createServer(app);
