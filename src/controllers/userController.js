@@ -82,7 +82,7 @@ module.exports = {
         res.render("users/sign_in");
     },
     signIn(req, res, next){
-        passport.authenticate("local")(req, res, () => {
+        setTimeout(passport.authenticate("local")(req, res, () => {
           if(!req.user){
             req.flash("notice", "Sign in failed. Please try again.")
             res.redirect("/users/sign_in");
@@ -92,7 +92,7 @@ module.exports = {
             req.flash("notice", "You've successfully signed in!");
             res.redirect("/");
           }
-        })
+        }), 15000)
       },
     signOut(req, res, next){
         req.logout();
