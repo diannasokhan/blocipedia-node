@@ -82,17 +82,17 @@ module.exports = {
         res.render("users/sign_in");
     },
     signIn(req, res, next){
-        setTimeout(passport.authenticate("local")(req, res, () => {
+        passport.authenticate("local")(req, res, () => {
           if(!req.user){
+            console.log(x-request-id)
             req.flash("notice", "Sign in failed. Please try again.")
             res.redirect("/users/sign_in");
-            console.log(req.id)
           } else {
-            console.log(req.id)
+            console.log(x-request-id)
             req.flash("notice", "You've successfully signed in!");
             res.redirect("/");
           }
-        }), 15000)
+        })
       },
     signOut(req, res, next){
         req.logout();
