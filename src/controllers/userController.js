@@ -86,7 +86,9 @@ module.exports = {
           if(!req.user){
             req.flash("notice", "Sign in failed. Please try again.")
             res.redirect("/users/sign_in");
+            console.log(req.id)
           } else {
+            console.log(req.id)
             req.flash("notice", "You've successfully signed in!");
             res.redirect("/");
           }
